@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class PurchaseProductPk implements Serializable {
 
-  private Integer purchaseId;
+  private Long purchaseId;
 
-  private Integer productId;
+  private Long productId;
 }

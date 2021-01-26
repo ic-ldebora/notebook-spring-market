@@ -18,11 +18,11 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   private String name;
 
-  private Integer categoryId;
+  private Long categoryId;
 
   private String barcode;
 
