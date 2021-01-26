@@ -1,42 +1,62 @@
 package com.market.backend.persistence;
 
+import com.market.backend.domain.ProductDto;
+import com.market.backend.domain.repository.ProductDtoRepository;
 import com.market.backend.persistence.crud.ProductCrudRepository;
 import com.market.backend.persistence.entity.Product;
+import com.market.backend.persistence.mapper.ProductDtoMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProductRepository {
+public class ProductRepository implements ProductDtoRepository {
 
   private ProductCrudRepository productCrudRepository;
+  private ProductDtoMapper productDtoMapper;
 
-  public List<Product> getAll() {
-    return (List<Product>) productCrudRepository.findAll();
+  @Override
+  public List<ProductDto> getAll() {
+
+    final List<Product> productList
+        = (List<Product>) productCrudRepository.findAll();
+
+    return productDtoMapper.toProductDtoList(productList);
   }
 
-  public List<Product> getByCategory(Long categoryId) {
-    return productCrudRepository
+  @Override
+  public Optional<List<ProductDto>> getByCategory(Long categoryId) {
+
+    final List<Product> productList = productCrudRepository
         .findByCategoryIdOrderByNameAsc(categoryId);
+
+    return Optional.of(productDtoMapper
+        .toProductDtoList(productList));
   }
 
-  public Optional<List<Product>> getScarce(Integer quantity) {
-    return productCrudRepository.
-        findByStockQuantityLessThanAndStatus(
-            quantity,
-            Boolean.TRUE
-        );
+  @Override
+  public Optional<List<ProductDto>> getScarceProducts(Integer quantity) {
+    final Optional<List<Product>> productList = productCrudRepository
+        .findByStockQuantityLessThanAndStatus(quantity, Boolean.TRUE);
+
+    return productList.map(productList1 -> productDtoMapper
+        .toProductDtoList(productList1));
   }
 
-  public Optional<Product> getProduct(Long id) {
-    return productCrudRepository.findById(id);
+  @Override
+  public Optional<ProductDto> getProduct(Long id) {
+    return productCrudRepository.findById(id)
+        .map(product -> productDtoMapper.toProductDto(product));
   }
 
-  public Product save(Product product) {
-    return productCrudRepository.save(product);
+  @Override
+  public ProductDto save(ProductDto productDto) {
+    return productDtoMapper.toProductDto(productCrudRepository
+        .save(productDtoMapper.toProduct(productDto)));
   }
 
+  @Override
   public void delete(Long id) {
     productCrudRepository.deleteById(id);
   }
