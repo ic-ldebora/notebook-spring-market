@@ -11,7 +11,7 @@ public interface ProductDtoRepository {
 
   Optional<List<ProductDto>> getByCategory(Long categoryId);
 
-  Optional<List<ProductDto>> getScarseProducts(Integer quantity);
+  Optional<List<ProductDto>> getScarceProducts(Integer quantity);
 
   Optional<ProductDto> getProduct(Long id);
 
