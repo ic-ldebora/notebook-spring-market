@@ -16,7 +16,7 @@ public interface PurchaseDtoMapper {
   @Mapping(source = "itemList", target = "purchaseProductList")
   PurchaseDto toPurchaseDto(Purchase purchase);
 
-  List<PurchaseDto> toPurchaseDto(List<Purchase> purchaseList);
+  List<PurchaseDto> toPurchaseDtoList(List<Purchase> purchaseList);
 
   @InheritInverseConfiguration
   @Mapping(target = "client", ignore = true)
