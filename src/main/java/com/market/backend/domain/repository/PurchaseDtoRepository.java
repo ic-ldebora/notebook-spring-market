@@ -5,7 +5,7 @@ import com.market.backend.domain.PurchaseDto;
 import java.util.List;
 import java.util.Optional;
 
-public interface PurchaseRepository {
+public interface PurchaseDtoRepository {
 
   List<PurchaseDto> getAll();
 
