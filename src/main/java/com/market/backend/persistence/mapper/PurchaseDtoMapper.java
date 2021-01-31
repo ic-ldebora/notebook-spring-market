@@ -8,12 +8,15 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(
+    componentModel = "spring",
+    uses = {PurchaseItemDtoMapper.class}
+)
 public interface PurchaseDtoMapper {
 
-  @Mapping(source = "paymentMethod", target = "halfPayment")
-  @Mapping(source = "state", target = "status")
-  @Mapping(source = "itemList", target = "purchaseProductList")
+  @Mapping(source = "halfPayment", target = "paymentMethod")
+  @Mapping(source = "status", target = "state")
+  @Mapping(source = "purchaseProductList", target = "itemList")
   PurchaseDto toPurchaseDto(Purchase purchase);
 
   List<PurchaseDto> toPurchaseDtoList(List<Purchase> purchaseList);
