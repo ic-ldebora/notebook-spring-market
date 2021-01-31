@@ -3,6 +3,7 @@ package com.market.backend.persistence.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +41,6 @@ public class Purchase {
   )
   private Client client;
 
-  @OneToMany(mappedBy = "product")
+  @OneToMany(mappedBy = "purchase", cascade = {CascadeType.ALL})
   private List<PurchaseProduct> purchaseProductList;
 }
