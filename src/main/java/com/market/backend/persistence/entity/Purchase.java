@@ -35,7 +35,7 @@ public class Purchase {
 
   @ManyToOne
   @JoinColumn(
-      name = "id",
+      name = "clientId",
       insertable = false,
       updatable = false
   )

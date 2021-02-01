@@ -24,9 +24,9 @@ public class PurchaseProduct {
   private Boolean status;
 
   @ManyToOne
-  @MapsId("id")
+  @MapsId("purchaseId")
   @JoinColumn(
-      name = "id",
+      name = "purchaseId",
       insertable = false,
       updatable = false
   )
@@ -34,7 +34,7 @@ public class PurchaseProduct {
 
   @ManyToOne
   @JoinColumn(
-      name = "id",
+      name = "productId",
       insertable = false,
       updatable = false
   )
